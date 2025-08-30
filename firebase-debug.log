@@ -1,0 +1,55 @@
+[debug] [2025-08-30T06:41:15.221Z] ----------------------------------------------------------------------
+[debug] [2025-08-30T06:41:15.223Z] Command:       C:\nvm4w\nodejs\node.exe C:\Users\lucky\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-08-30T06:41:15.223Z] CLI Version:   14.15.1
+[debug] [2025-08-30T06:41:15.224Z] Platform:      win32
+[debug] [2025-08-30T06:41:15.224Z] Node Version:  v22.13.1
+[debug] [2025-08-30T06:41:15.224Z] Time:          Sat Aug 30 2025 12:11:15 GMT+0530 (India Standard Time)
+[debug] [2025-08-30T06:41:15.224Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-30T06:41:15.226Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-08-30T06:41:15.272Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-30T06:41:15.272Z] > authorizing via signed-in user (23eg105n27@anurag.edu.in)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\bridge-investor-app
+
+[debug] [2025-08-30T06:41:16.444Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-08-30T06:41:16.444Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2025-08-30T06:42:19.176Z] Checked if tokens are valid: false, expires at: 1756449691840
+[debug] [2025-08-30T06:42:19.176Z] Checked if tokens are valid: false, expires at: 1756449691840
+[debug] [2025-08-30T06:42:19.177Z] > refreshing access token with scopes: []
+[debug] [2025-08-30T06:42:19.178Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-30T06:42:19.178Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-30T06:42:19.360Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-30T06:42:19.361Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-30T06:42:19.382Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2025-08-30T06:42:19.382Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"bridge-investors-app"}
+[debug] [2025-08-30T06:42:20.020Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2025-08-30T06:42:20.020Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"bridge-investors-app"}
+[debug] [2025-08-30T06:42:32.044Z] Checked if tokens are valid: true, expires at: 1756539738361
+[debug] [2025-08-30T06:42:32.044Z] Checked if tokens are valid: true, expires at: 1756539738361
+[debug] [2025-08-30T06:42:32.044Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2025-08-30T06:42:32.044Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"bridge-investors-app","name":"bridge-investors"}
+[debug] [2025-08-30T06:42:33.354Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 429
+[debug] [2025-08-30T06:42:33.355Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":429,"message":"Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute' of service 'cloudresourcemanager.googleapis.com' for consumer 'project_number:563584335869'.","status":"RESOURCE_EXHAUSTED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"RATE_LIMIT_EXCEEDED","domain":"googleapis.com","metadata":{"consumer":"projects/563584335869","quota_location":"global","quota_limit_value":"600","quota_metric":"cloudresourcemanager.googleapis.com/write_requests","service":"cloudresourcemanager.googleapis.com","quota_unit":"1/min/{project}","quota_limit":"WriteRequestsPerMinutePerProject"}},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Request a higher quota limit.","url":"https://cloud.google.com/docs/quotas/help/request_increase"}]}]}}
+[debug] [2025-08-30T06:42:33.483Z] FirebaseError: Request to https://cloudresourcemanager.googleapis.com/v1/projects had HTTP Error: 429, Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute' of service 'cloudresourcemanager.googleapis.com' for consumer 'project_number:563584335869'.
+    at responseToError (C:\Users\lucky\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\lucky\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
