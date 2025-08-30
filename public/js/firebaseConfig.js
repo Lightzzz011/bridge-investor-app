@@ -4,13 +4,13 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyCkO0yC8Vzd4K-OKAQAdBGe-LqdsKIQg-Q",
+  authDomain: "bridge-investors-app.firebaseapp.com",
+  projectId: "bridge-investors-app",
+  storageBucket: "bridge-investors-app.appspot.com",
+  messagingSenderId: "1021471133561",
+  appId: "1:1021471133561:web:db9fe4dc307239b82a69a8",
+  measurementId: "G-VG28FVK550"
 };
 
 const app = initializeApp(firebaseConfig);
