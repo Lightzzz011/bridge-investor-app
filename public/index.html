@@ -6,72 +6,64 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <center>
-  <header>
-    <h1>Bridge Platform</h1>
-    <button id="btnLogin">Login with Google</button>
-    <button id="btnLogout" class="hidden">Logout</button>
-  </header>
+  <center>
+    <header>
+      <h1>Bridge Platform</h1>
+      <button id="btnLogout" class="hidden">Logout</button>
+    </header>
 
-  <div id="app">
-    <!-- Tabs -->
-    <div class="tabs">
-      <div class="tab active" data-role="business">Business</div>
-      <div class="tab" data-role="investor">Investor</div>
-      <div class="tab" data-role="advisor">Advisor</div>
-    </div>
-
-    <!-- Role Sections -->
-    <div id="businessSection" class="role-section active">
-      <h2>Business Profiles</h2>
-      <form id="businessForm">
-        <input type="text" id="businessName" name="businessName" placeholder="Business Name" required />
-        <input type="text" id="businessDesc" name="businessDesc" placeholder="Description" required />
-        <button type="submit">Submit Business</button>
+    <div id="authSection">
+      <!-- Registration -->
+      <h2>Register</h2>
+      <form id="registerForm">
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Password" required />
+        <select id="regRole" required>
+          <option value="">Select Role</option>
+          <option value="business">Business</option>
+          <option value="investor">Investor</option>
+        </select>
+        <button type="submit">Register</button>
       </form>
-      <div id="businessCards"></div>
-    </div>
 
-    <div id="investorSection" class="role-section">
-      <h2>Investor Profiles</h2>
-      <form id="investorForm">
-        <input type="text" id="investorName" name="investorName" placeholder="Investor Name" required />
-        <input type="text" id="investmentFocus" name="investmentFocus" placeholder="Investment Focus" required />
-        <button type="submit">Submit Investor</button>
+      <!-- Login -->
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
       </form>
-      <div id="investorCards"></div>
     </div>
 
-    <div id="advisorSection" class="role-section">
-      <h2>Advisor Section</h2>
-      <p>Coming soon...</p>
+    <div id="app" class="hidden">
+      <!-- Business Section -->
+      <div id="businessSection" class="role-section">
+        <h2>Business Profiles</h2>
+        <form id="businessForm">
+          <input type="text" id="businessName" placeholder="Business Name" required />
+          <input type="text" id="businessDesc" placeholder="Description" required />
+          <button type="submit">Submit Business</button>
+        </form>
+        <div id="businessCards"></div>
+      </div>
+
+      <!-- Investor Section -->
+      <div id="investorSection" class="role-section">
+        <h2>Investor Profiles</h2>
+        <form id="investorForm">
+          <input type="text" id="investorName" placeholder="Investor Name" required />
+          <input type="text" id="investmentFocus" placeholder="Investment Focus" required />
+          <button type="submit">Submit Investor</button>
+        </form>
+        <div id="investorCards"></div>
+      </div>
     </div>
-  </div>
 
-  <footer>
-    <p>© 2025 Bridge — Investors & Business People</p>
-  </footer>
+    <footer>
+      <p>© 2025 Bridge — Investors & Business People</p>
+    </footer>
 
-  <script type="module" src="js/main.js"></script>
-  <script>
-    // Tabs switching
-    const tabs = document.querySelectorAll(".tab");
-    const sections = {
-      business: document.getElementById("businessSection"),
-      investor: document.getElementById("investorSection"),
-      advisor: document.getElementById("advisorSection")
-    };
-
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-
-        Object.keys(sections).forEach(r => sections[r].classList.remove("active"));
-        sections[tab.dataset.role].classList.add("active");
-      });
-    });
-  </script>
+    <script type="module" src="js/main.js"></script>
   </center>
 </body>
 </html>

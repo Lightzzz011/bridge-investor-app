@@ -1,22 +1,53 @@
-// main.js
-import { loginWithGoogle, logoutUser, observeAuth } from "./auth.js";
+import { loginUser, registerUser, logoutUser, observeAuth } from "./auth.js";
 import { registerProfile, getProfiles } from "./api/users.js";
+import { db } from "./firebaseConfig.js";
+import {
+  doc,
+  setDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-const loginBtn = document.getElementById("btnLogin");
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
 const logoutBtn = document.getElementById("btnLogout");
 
-// Sections
+const authSection = document.getElementById("authSection");
+const appSection = document.getElementById("app");
+
 const businessForm = document.getElementById("businessForm");
 const investorForm = document.getElementById("investorForm");
 const businessCards = document.getElementById("businessCards");
 const investorCards = document.getElementById("investorCards");
 
-// Login / Logout
-loginBtn.addEventListener("click", async () => {
+let currentUserRole = null;
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
   try {
-    await loginWithGoogle();
+    await loginUser(email, password);
+    loginForm.reset();
   } catch (err) {
-    console.error("Login failed:", err);
+    console.error("Login failed:", err.message);
+    alert("Login failed: " + err.message);
+  }
+});
+
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("regEmail").value;
+  const password = document.getElementById("regPassword").value;
+  const role = document.getElementById("regRole").value;
+  try {
+    const user = await registerUser(email, password);
+ 
+    await setDoc(doc(db, "users", user.uid), { role });
+    registerForm.reset();
+    alert("Account created! You can now log in.");
+  } catch (err) {
+    console.error("Registration failed:", err.message);
+    alert("Registration failed: " + err.message);
   }
 });
 
@@ -24,11 +55,11 @@ logoutBtn.addEventListener("click", async () => {
   try {
     await logoutUser();
   } catch (err) {
-    console.error("Logout failed:", err);
+    console.error("Logout failed:", err.message);
   }
 });
 
-// Helper to create a card
+
 function createCard(title, content) {
   const div = document.createElement("div");
   div.className = "card";
@@ -36,19 +67,17 @@ function createCard(title, content) {
   return div;
 }
 
-// Populate profiles
 async function populateProfiles(role) {
   const container = role === "business" ? businessCards : investorCards;
   container.innerHTML = "";
   const profiles = await getProfiles(role);
-  profiles.forEach(p => {
+  profiles.forEach((p) => {
     let content = role === "business" ? p.description : p.investmentFocus;
     const card = createCard(p.name, content);
     container.appendChild(card);
   });
 }
 
-// Form submissions
 businessForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("businessName").value;
@@ -75,20 +104,38 @@ investorForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Observe authentication
+
 observeAuth(async (user) => {
-  const isLoggedIn = !!user;
-  loginBtn.classList.toggle("hidden", isLoggedIn);
-  logoutBtn.classList.toggle("hidden", !isLoggedIn);
+  if (!user) {
+    currentUserRole = null;
+    authSection.classList.remove("hidden");
+    appSection.classList.add("hidden");
+    logoutBtn.classList.add("hidden");
+    return;
+  }
 
-  businessForm.style.display = isLoggedIn ? "block" : "none";
-  investorForm.style.display = isLoggedIn ? "block" : "none";
+  // get user role from Firestore
+  const snap = await getDoc(doc(db, "users", user.uid));
+  currentUserRole = snap.exists() ? snap.data().role : null;
 
-  if (isLoggedIn) {
-    await populateProfiles("business");
-    await populateProfiles("investor");
+  authSection.classList.add("hidden");
+  appSection.classList.remove("hidden");
+  logoutBtn.classList.remove("hidden");
+
+  const businessSection = document.getElementById("businessSection");
+  const investorSection = document.getElementById("investorSection");
+
+  if (currentUserRole === "business") {
+    businessSection.style.display = "none";   // hide own section
+    investorSection.style.display = "block";  // show opposite
+    await populateProfiles("investor");       // load investors
+  } else if (currentUserRole === "investor") {
+    businessSection.style.display = "block";  // show opposite
+    investorSection.style.display = "none";   // hide own section
+    await populateProfiles("business");       // load businesses
   } else {
-    businessCards.innerHTML = "<p>Please login to view business profiles.</p>";
-    investorCards.innerHTML = "<p>Please login to view investor profiles.</p>";
+    businessSection.style.display = "none";
+    investorSection.style.display = "none";
   }
 });
+

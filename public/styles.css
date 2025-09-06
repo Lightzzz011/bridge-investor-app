@@ -9,6 +9,7 @@
   --shadow: rgba(0, 0, 0, 0.35);
 }
 
+/* Reset */
 *,
 *::before,
 *::after {
@@ -23,37 +24,22 @@ body {
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
-}
-
-.container {
-  max-width: 1080px;
-  margin: 0 auto;
   padding: 20px;
 }
 
-.card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 12px 24px var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px var(--shadow);
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #fff;
 }
 
-.grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.hidden {
-  display: none !important;
-}
-
+/* Buttons */
 button {
   background: var(--primary);
   color: #fff;
@@ -63,15 +49,77 @@ button {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s ease, transform 0.1s ease;
+  margin: 5px;
 }
 
 button:hover {
-  background: #2563eb; /* slightly darker */
+  background: #2563eb;
   transform: translateY(-2px);
 }
 
 button:active {
   transform: translateY(0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--card);
+  color: var(--muted);
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tab:hover {
+  background: #1f2330;
+}
+
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Sections */
+.role-section {
+  display: none;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px var(--shadow);
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.role-section.active {
+  display: block;
+}
+
+.role-section h2 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 input,
@@ -95,12 +143,26 @@ textarea:focus {
   box-shadow: 0 0 6px var(--primary);
 }
 
-label {
-  display: block;
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 6px;
-  margin-top: 12px;
+/* Cards for submitted profiles */
+#businessCards,
+#investorCards {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 15px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 12px 24px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px var(--shadow);
 }
 
 /* Footer */
@@ -110,4 +172,10 @@ footer {
   padding: 20px 0;
   color: var(--muted);
   font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
