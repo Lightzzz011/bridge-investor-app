@@ -1,17 +1,10 @@
-/**
- * Firebase Functions — Backend entry
- * Handles logging + placeholder APIs for users, advisors, bankers, etc.
- */
+
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
 admin.initializeApp();
 const db = admin.firestore();
 
-/**
- * Simple HTTP endpoint to log actions.
- * Frontend will POST logs here.
- */
 exports.logAction = functions.https.onRequest(async (req, res) => {
   try {
     const { ts, action, targetType, targetId, details } = req.body;
